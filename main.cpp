@@ -81,23 +81,59 @@ int main(int argc, char **argv) {
 			delete[] E;
 		}
 		unsigned long finish_time = clock();
-		double tick_time = (finish_time - start_time) / static_cast<double>(REPEAT_NUM);
+		double tick_time = (finish_time - start_time)/* / static_cast<double>(REPEAT_NUM)*/;
 		cout << "Set clocks: " << tick_time << endl;
+
+		ListNode* list_A = str_to_list(st_A);
+		ListNode* list_B = str_to_list(st_B);
+		ListNode* list_C = str_to_list(st_C);
+		ListNode* list_D = str_to_list(st_D);
+		start_time = clock();
+		for (int z = 0; z < REPEAT_NUM; z++) {
+			ListNode* list_C_D = cross(list_C, list_D);
+			ListNode* list_B_C_D = cross(list_B, list_C_D);
+			ListNode* list_E = unite(list_A, list_B_C_D);
+
+			delete list_C_D;
+			delete list_B_C_D;
+			delete list_E;
+		}
+		finish_time = clock();
+		tick_time = (finish_time - start_time)/* / static_cast<double>(REPEAT_NUM)*/;
+		cout << "Lists clocks: " << tick_time << endl;
+
+		int bits_A = stb(st_A);
+		int bits_B = stb(st_B);
+		int bits_C = stb(st_C);
+		int bits_D = stb(st_D);
+		start_time = clock();
+		for (int z = 0; z < REPEAT_NUM; z++) {
+			int bits_C_D = bits_C & bits_D;
+			int bits_B_C_D = bits_B & bits_C_D;
+			int bits_E = bits_A | bits_B_C_D;
+
+		}
+		finish_time = clock();
+		tick_time = (finish_time - start_time) /*/ static_cast<double>(REPEAT_NUM)*/;
+		cout << "Bits clocks: " << tick_time << endl;
+		return 0;
 	}
     
 	
 	// ARRAYS
-    E = unite(A, triple_cross(B, C, D));
 
-    cout << "Sets as arrays: " << endl;
-    cout << "Input: " << endl;
-    cout << A << endl
-         << B << endl
-         << C << endl
-         << D << endl;
+		E = unite(A, triple_cross(B, C, D));
 
-    cout << "Result: " << endl;
-    cout << E << endl;
+	cout << "Sets as arrays: " << endl;
+	cout << "Input: " << endl;
+	cout << A << endl
+		<< B << endl
+		<< C << endl
+		<< D << endl;
+
+		cout << "Result: " << endl;
+		cout << E << endl;
+	
 
 	// LIST
 	ListNode* list_A = str_to_list(A);
@@ -106,7 +142,6 @@ int main(int argc, char **argv) {
 	ListNode* list_D = str_to_list(D);
 
 	ListNode* list_E = unite(list_A, cross(list_B, cross(list_C, list_D)));
-	//ListNode* list_E = unite(list_A, list_B);
 
 	cout << "Sets as lists: " << endl;
 	cout << "Input: " << endl;
@@ -143,7 +178,6 @@ int main(int argc, char **argv) {
 	delete[] C;
 	delete[] D;
 	delete[] E;
-
     return 0;
 }
 
