@@ -45,12 +45,12 @@ namespace SetsOperations
 
         return C;
     }
-	
+
     char* triple_cross(char* A, char* B, char* C)
     {
         return cross(A, cross(B, C));
     }
-	
+
 };
 
 namespace ListOperations
@@ -62,7 +62,7 @@ namespace ListOperations
         {
             list_head = add_element_to_list(list_head, str[i]);
         }
-		return list_head;
+        return list_head;
     };
 
     ListNode* add_element_to_list(ListNode* list_head, char ch)
@@ -96,25 +96,25 @@ namespace ListOperations
     void show(ListNode* head)
     {
         for (auto i = head; i != nullptr; i = i->next)
-			std::cout << i->data;
+            std::cout << i->data;
         std::cout << std::endl;
     }
 
-	ListNode* cross(ListNode* head_1, ListNode* head_2)
+    ListNode* cross(ListNode* head_1, ListNode* head_2)
     {
         ListNode* new_head{nullptr};
 
         for (auto cur = head_1; cur; cur = cur->next)
         {
             for(auto cur2 = head_2; cur2; cur2 = cur2->next)
-				if (cur->data == cur2->data)
-					new_head = add_element_to_list(new_head, cur->data);
+                if (cur->data == cur2->data)
+                    new_head = add_element_to_list(new_head, cur->data);
         }
 
         return new_head;
     };
 
-	ListNode* unite(ListNode* head_1, ListNode* head_2)
+    ListNode* unite(ListNode* head_1, ListNode* head_2)
     {
         ListNode* new_head{nullptr};
 
@@ -122,14 +122,14 @@ namespace ListOperations
         {
             auto cur2 = head_2;
             for(; cur2; cur2 = cur2->next)
-				if (cur->data == cur2->data)
-					break;
+                if (cur->data == cur2->data)
+                    break;
             if (!cur2)
-				new_head = add_element_to_list(new_head, cur->data);
+                new_head = add_element_to_list(new_head, cur->data);
         }
         for (auto cur2 = head_2; cur2; cur2 = cur2->next)
         {
-			new_head = add_element_to_list(new_head, cur2->data);
+            new_head = add_element_to_list(new_head, cur2->data);
         }
 
         return new_head;
@@ -138,47 +138,47 @@ namespace ListOperations
 
 namespace BitsOperations
 {
-	int ctb(char ch)
-	{
-		int bytes = 0x0;
+    int ctb(char ch)
+    {
+        int bytes = 0x0;
 
-		if (ch >= '0' && ch <= '9')
-			bytes = 0x1 << (ch - '0');
-		else if (ch >= 'A' && ch <= 'F')
-			bytes = 0x400 << (ch - 'A');
-		else if (ch >= 'a' && ch <= 'f')
-			bytes = 0x400 << (ch - 'a');
+        if (ch >= '0' && ch <= '9')
+            bytes = 0x1 << (ch - '0');
+        else if (ch >= 'A' && ch <= 'F')
+            bytes = 0x400 << (ch - 'A');
+        else if (ch >= 'a' && ch <= 'f')
+            bytes = 0x400 << (ch - 'a');
 
-		return bytes;
-	}
+        return bytes;
+    }
 
-	std::string bts(int bytes)
-	{
-		std::string str{};
-		char cur_hex_digit{ '0' };
-		while (bytes)
-		{
-			if (cur_hex_digit == '9' + 1)
-				cur_hex_digit = 'A';
-			else if (cur_hex_digit == 'F' + 1)
-				break;
+    std::string bts(int bytes)
+    {
+        std::string str{};
+        char cur_hex_digit{ '0' };
+        while (bytes)
+        {
+            if (cur_hex_digit == '9' + 1)
+                cur_hex_digit = 'A';
+            else if (cur_hex_digit == 'F' + 1)
+                break;
 
-			if (bytes & 0x1)
-				str += cur_hex_digit;
+            if (bytes & 0x1)
+                str += cur_hex_digit;
 
-			cur_hex_digit++;
-			bytes >>= 1;
-		}
+            cur_hex_digit++;
+            bytes >>= 1;
+        }
 
-		return str;
-	};
+        return str;
+    };
 
-	int stb(const std::string& str)
-	{
-		int new_arr{ 0x0 };
-		for (auto ch : str)
-			new_arr |= ctb(ch);
+    int stb(const std::string& str)
+    {
+        int new_arr{ 0x0 };
+        for (auto ch : str)
+            new_arr |= ctb(ch);
 
-		return new_arr;
-	};
+        return new_arr;
+    };
 };
